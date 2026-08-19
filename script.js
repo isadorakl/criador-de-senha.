@@ -1,26 +1,38 @@
-// Parte 1: obter os dados
-function obterDados() {
-    // Aqui podemos definir uma lista de números
-    const numeros = [10, 20, 30, 40, 50];
-    return numeros;
+// Função para gerar senha
+function gerarSenha(tamanho, maiusc, minusc, num, simbolos) {
+    const maiuscChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minuscChars = "abcdefghijklmnopqrstuvwxyz";
+    const numChars = "0123456789";
+    const simbolosChars = "!@#$%^&*()_+-=[]{}|;:'\",.<>/?";
+
+    let caracteres = "";
+
+    if (maiusc) caracteres += maiuscChars;
+    if (minusc) caracteres += minuscChars;
+    if (num) caracteres += numChars;
+    if (simbolos) caracteres += simbolosChars;
+
+    if (caracteres === "") {
+        alert("Selecione pelo menos uma opção de caracteres!");
+        return "";
+    }
+
+    let senha = "";
+    for (let i = 0; i < tamanho; i++) {
+        const index = Math.floor(Math.random() * caracteres.length);
+        senha += caracteres[index];
+    }
+    return senha;
 }
 
-// Parte 2: calcular soma e média
-function calcularSomaMedia(numeros) {
-    const soma = numeros.reduce((acc, val) => acc + val, 0);
-    const media = numeros.length ? soma / numeros.length : 0;
-    return { soma, media };
-}
+// Evento do botão
+document.getElementById('gerarBtn').addEventListener('click', () => {
+    const tamanho = parseInt(document.getElementById('tamanhoSenha').value);
+    const maiusc = document.getElementById('maiusc').checked;
+    const minusc = document.getElementById('minusc').checked;
+    const num = document.getElementById('num').checked;
+    const simbolos = document.getElementById('simbolos').checked;
 
-// Parte 3: exibir resultados
-function exibirResultados(soma, media) {
-    document.getElementById('soma').textContent = `Soma: ${soma}`;
-    document.getElementById('media').textContent = `Média: ${media}`;
-}
-
-// Evento de clique no botão
-document.getElementById('calcularBtn').addEventListener('click', () => {
-    const numeros = obterDados();
-    const { soma, media } = calcularSomaMedia(numeros);
-    exibirResultados(soma, media);
+    const senha = gerarSenha(tamanho, maiusc, minusc, num, simbolos);
+    document.getElementById('senhaGerada').textContent = senha || "---";
 });
