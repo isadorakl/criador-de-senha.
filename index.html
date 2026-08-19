@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadora de Soma e Média</title>
+    <title>Gerador de Senha</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Calculadora de Soma e Média</h1>
-    <button id="calcularBtn">Calcular</button>
-    <div id="resultados">
-        <p id="soma">Soma: </p>
-        <p id="media">Média: </p>
+    <h1>Gerador de Senha</h1>
+    <div class="container">
+        <label for="tamanhoSenha">Tamanho da senha:</label>
+        <input type="number" id="tamanhoSenha" min="4" max="32" value="12" />
+
+        <div class="opcoes">
+            <label><input type="checkbox" id="maiusc" checked /> Maiúsculas</label>
+            <label><input type="checkbox" id="minusc" checked /> Minúsculas</label>
+            <label><input type="checkbox" id="num" checked /> Números</label>
+            <label><input type="checkbox" id="simbolos" checked /> Símbolos</label>
+        </div>
+
+        <button id="gerarBtn">Gerar Senha</button>
+
+        <div class="resultado">
+            <h2>Sua senha:</h2>
+            <p id="senhaGerada">---</p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
+</html>
